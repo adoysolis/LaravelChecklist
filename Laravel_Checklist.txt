@@ -1015,6 +1015,7 @@ STOP CODING.
 9. Send one localhost request using Postman.
 
 ==============seeder
+command: php artisan make:seeder UserSeeder    
 command: php artisan db:seed --class=UserSeeder 
 
 
