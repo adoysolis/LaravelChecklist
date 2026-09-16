@@ -1,0 +1,1016 @@
+OFFICIAL DOWNLOAD LINKS
+=======================
+IMPORTANT: Download/install these BEFORE the internet is cut if they are not already working.
+
+1) XAMPP (Apache + PHP + MySQL)
+   https://www.apachefriends.org/download.html
+   Verify:
+       php -v
+
+2) Composer
+   https://getcomposer.org/download/
+   Windows installer:
+   https://getcomposer.org/Composer-Setup.exe
+   Verify:
+       composer --version
+
+3) Visual Studio Code
+   https://code.visualstudio.com/download
+
+4) Git for Windows
+   https://git-scm.com/download/win
+   Verify:
+       git --version
+
+5) Postman
+   https://www.postman.com/downloads/
+   IMPORTANT: Open it before cutoff and confirm you can test localhost APIs.
+
+6) Node.js (ONLY if the assessment needs npm/Vite/frontend assets)
+   https://nodejs.org/en/download
+   Verify:
+       node -v
+       npm -v
+
+7) Laravel Documentation (useful while internet is available)
+   https://laravel.com/docs
+
+OPTIONAL VS CODE EXTENSIONS
+===========================
+Install while online if you want them:
+- PHP Intelephense
+- Laravel-related extensions
+- GitLens (optional)
+
+Extensions are helpful, but Laravel itself does not require them.
+
+
+============================================================
+30-MINUTE ONLINE CHECKLIST
+============================================================
+
+0–5 MINUTES — CHECK SOFTWARE
+-----------------------------
+[ ] XAMPP installed
+[ ] Composer installed
+[ ] VS Code installed
+[ ] Git installed if required
+[ ] Postman installed
+[ ] Node/npm installed ONLY if required
+[ ] Desired VS Code extensions installed
+
+PowerShell checks:
+
+    php -v
+    composer --version
+    git --version
+    node -v
+    npm -v
+
+Do not panic if node/npm are unavailable unless the assessment specifically requires them.
+
+
+5–12 MINUTES — CREATE LARAVEL PROJECT
+-------------------------------------
+Open PowerShell:
+
+    cd C:\xampp\htdocs
+
+Create project:
+
+    composer create-project laravel/laravel assessment_project
+
+Enter project:
+
+    cd assessment_project
+
+IMPORTANT:
+[ ] Confirm vendor folder exists.
+[ ] DO NOT DELETE vendor after internet cutoff.
+[ ] Do not run composer update unnecessarily during the offline assessment.
+
+Check Laravel:
+
+    php artisan --version
+
+Start server:
+
+    php artisan serve
+
+Default URL:
+
+    http://127.0.0.1:8000
+
+
+12–17 MINUTES — PREPARE API
+----------------------------
+Check files:
+
+    Get-ChildItem
+
+Check routes:
+
+    php artisan route:list
+
+If routes/api.php is missing and your Laravel version uses the API installer:
+
+    php artisan install:api
+
+IMPORTANT:
+Run "php artisan install:api" while ONLINE because Composer may need to
+download packages.
+
+Check again:
+
+    php artisan route:list
+
+
+17–21 MINUTES — MYSQL DATABASE
+-------------------------------
+Start MySQL in XAMPP.
+
+Create database in phpMyAdmin, for example:
+
+    assessment_db
+
+Edit .env:
+
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=assessment_db
+    DB_USERNAME=root
+    DB_PASSWORD=
+
+Clear cached configuration if needed:
+
+    php artisan config:clear
+
+Test:
+
+    php artisan migrate
+
+
+21–25 MINUTES — GIT
+--------------------
+If required:
+
+    git init
+    git status
+    git add .
+    git commit -m "Initial Laravel setup"
+
+Create development branch:
+
+    git checkout -b development
+
+Check branches:
+
+    git branch
+
+IMPORTANT:
+Local Git commands and commits work OFFLINE.
+Pushing to GitHub/GitLab requires internet.
+
+
+25–28 MINUTES — POSTMAN TEST
+-----------------------------
+Start Laravel:
+
+    php artisan serve
+
+Example test endpoint:
+
+    GET http://127.0.0.1:8000/api/products
+
+In Postman:
+    1. Select GET.
+    2. Enter endpoint.
+    3. Click Send.
+    4. Check status code and JSON response.
+
+For POST/PUT/PATCH:
+    Body -> raw -> JSON
+
+Example:
+
+    {
+        "name": "Keyboard",
+        "price": 850,
+        "stock": 10
+    }
+
+Useful header:
+
+    Accept: application/json
+    Content-Type: application/json
+
+
+28–30 MINUTES — FINAL INTERNET CUTOFF CHECK
+-------------------------------------------
+[ ] Laravel project exists
+[ ] vendor folder exists
+[ ] .env exists
+[ ] APP_KEY exists
+[ ] routes/api.php exists if needed
+[ ] API packages installed
+[ ] php artisan serve works
+[ ] php artisan route:list works
+[ ] MySQL works
+[ ] php artisan migrate works
+[ ] Postman opens
+[ ] Postman successfully calls localhost
+[ ] Git works
+[ ] development branch exists if required
+[ ] Assessment files/instructions downloaded
+[ ] Required reference material downloaded
+[ ] Any required npm packages already downloaded if frontend/Vite is required
+
+
+============================================================
+POWERSHELL QUICK REFERENCE
+============================================================
+
+NAVIGATION
+----------
+Show current folder:
+
+    Get-Location
+
+List files/folders:
+
+    Get-ChildItem
+
+Short aliases also work:
+
+    pwd
+    ls
+    dir
+
+Change folder:
+
+    cd C:\xampp\htdocs
+
+Go into project:
+
+    cd backend_assessment_v2
+
+Go up one directory:
+
+    cd ..
+
+Go to drive root:
+
+    cd C:\
+
+Create directory:
+
+    mkdir test_project
+
+Check whether a folder exists:
+
+    Test-Path .\vendor
+
+
+DELETE FILE/FOLDER — POWERSHELL SYNTAX
+--------------------------------------
+IMPORTANT:
+Do NOT use CMD syntax such as:
+
+    rmdir /s /q vendor
+
+inside PowerShell.
+
+PowerShell syntax:
+
+Delete a file:
+
+    Remove-Item .\example.txt
+
+Delete folder recursively:
+
+    Remove-Item .\foldername -Recurse
+
+Force deletion:
+
+    Remove-Item .\foldername -Recurse -Force
+
+Example:
+
+    Remove-Item .\vendor -Recurse -Force
+
+WARNING:
+Do NOT delete vendor during an offline assessment unless you have a safe
+way to restore dependencies.
+
+
+COPY / MOVE / RENAME
+--------------------
+Copy file:
+
+    Copy-Item source.txt destination.txt
+
+Copy folder:
+
+    Copy-Item .\source .\backup -Recurse
+
+Move:
+
+    Move-Item old.txt .\folder\
+
+Rename:
+
+    Rename-Item old.txt new.txt
+
+
+CLEAR TERMINAL
+--------------
+    Clear-Host
+
+or:
+
+    cls
+
+
+============================================================
+COMPOSER COMMANDS
+============================================================
+
+Check version:
+
+    composer --version
+
+Create Laravel project:
+
+    composer create-project laravel/laravel project_name
+
+Install packages from existing composer.lock:
+
+    composer install
+
+IMPORTANT DIFFERENCE:
+
+    composer install
+
+Uses the versions recorded in composer.lock. Usually the safer command.
+
+    composer update
+
+Looks for newer allowed package versions and changes composer.lock.
+Avoid doing this casually during an assessment.
+
+Regenerate Composer autoload files:
+
+    composer dump-autoload
+
+Useful when classes/files appear not to be recognized.
+
+IMPORTANT:
+composer install/update may require internet if packages are not cached.
+
+
+============================================================
+COMMON LARAVEL ARTISAN COMMANDS
+============================================================
+
+General syntax:
+
+    php artisan COMMAND [arguments] [options]
+
+Show available commands:
+
+    php artisan list
+
+Laravel version:
+
+    php artisan --version
+
+Start server:
+
+    php artisan serve
+
+Custom port:
+
+    php artisan serve --port=8080
+
+Show routes:
+
+    php artisan route:list
+
+Filter route list:
+
+    php artisan route:list --path=api
+
+
+CREATE MODEL
+------------
+Syntax:
+
+    php artisan make:model ModelName
+
+Example:
+
+    php artisan make:model Product
+
+Model + migration:
+
+    php artisan make:model Product -m
+
+Very useful shortcut:
+
+    php artisan make:model Product -mcr
+
+Depending on Laravel version/options, this can generate multiple related files.
+For an assessment, using explicit commands is often easier to remember.
+
+
+CREATE CONTROLLER
+-----------------
+Basic:
+
+    php artisan make:controller ProductController
+
+API controller:
+
+    php artisan make:controller ProductController --api
+
+Resource controller:
+
+    php artisan make:controller ProductController --resource
+
+
+CREATE MIGRATION
+----------------
+Syntax:
+
+    php artisan make:migration migration_name
+
+Example:
+
+    php artisan make:migration create_products_table
+
+Run migrations:
+
+    php artisan migrate
+
+See migration status:
+
+    php artisan migrate:status
+
+Rollback latest batch:
+
+    php artisan migrate:rollback
+
+Drop all tables and rerun migrations:
+
+    php artisan migrate:fresh
+
+WARNING:
+migrate:fresh DELETES existing database tables/data.
+
+
+CREATE FORM REQUEST / VALIDATION CLASS
+--------------------------------------
+    php artisan make:request StoreProductRequest
+
+Example validation can also be placed directly in a controller:
+
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric|min:0',
+        'stock' => 'required|integer|min:0',
+    ]);
+
+
+CACHE TROUBLESHOOTING
+---------------------
+Clear application cache:
+
+    php artisan cache:clear
+
+Clear config:
+
+    php artisan config:clear
+
+Clear routes:
+
+    php artisan route:clear
+
+Clear compiled views:
+
+    php artisan view:clear
+
+Clear common optimized caches:
+
+    php artisan optimize:clear
+
+
+============================================================
+LARAVEL API ROUTE SYNTAX
+============================================================
+
+routes/api.php:
+
+Import controller:
+
+    use App\Http\Controllers\ProductController;
+
+One GET route:
+
+    Route::get('/products', [ProductController::class, 'index']);
+
+POST:
+
+    Route::post('/products', [ProductController::class, 'store']);
+
+GET one:
+
+    Route::get('/products/{product}', [ProductController::class, 'show']);
+
+PUT:
+
+    Route::put('/products/{product}', [ProductController::class, 'update']);
+
+DELETE:
+
+    Route::delete('/products/{product}', [ProductController::class, 'destroy']);
+
+Shortcut for REST API CRUD:
+
+    Route::apiResource('products', ProductController::class);
+
+This typically creates:
+    GET       /api/products
+    POST      /api/products
+    GET       /api/products/{product}
+    PUT/PATCH /api/products/{product}
+    DELETE    /api/products/{product}
+
+
+============================================================
+CONTROLLER CRUD PATTERN
+============================================================
+
+Typical imports:
+
+    use App\Models\Product;
+    use Illuminate\Http\Request;
+
+INDEX — READ ALL:
+
+    public function index()
+    {
+        return Product::all();
+    }
+
+STORE — CREATE:
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'stock' => 'required|integer',
+        ]);
+
+        $product = Product::create($validated);
+
+        return response()->json($product, 201);
+    }
+
+SHOW — READ ONE:
+
+    public function show(Product $product)
+    {
+        return $product;
+    }
+
+UPDATE:
+
+    public function update(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'stock' => 'required|integer',
+        ]);
+
+        $product->update($validated);
+
+        return response()->json($product);
+    }
+
+DESTROY — DELETE:
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+
+        return response()->json(null, 204);
+    }
+
+
+============================================================
+MODEL SYNTAX
+============================================================
+
+Example Product model:
+
+    <?php
+
+    namespace App\Models;
+
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Model;
+
+    class Product extends Model
+    {
+        use HasFactory;
+
+        protected $fillable = [
+            'name',
+            'price',
+            'stock',
+        ];
+    }
+
+IMPORTANT:
+If using:
+
+    Product::create($validated);
+
+make sure the required fields are mass assignable, commonly using $fillable.
+
+
+============================================================
+MIGRATION SYNTAX
+============================================================
+
+Example:
+
+    Schema::create('products', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->decimal('price', 10, 2);
+        $table->integer('stock')->default(0);
+        $table->timestamps();
+    });
+
+Then:
+
+    php artisan migrate
+
+
+============================================================
+POSTMAN CRUD CHEAT SHEET
+============================================================
+
+READ ALL
+--------
+Method:
+    GET
+
+URL:
+    http://127.0.0.1:8000/api/products
+
+
+READ ONE
+--------
+Method:
+    GET
+
+URL:
+    http://127.0.0.1:8000/api/products/1
+
+
+CREATE
+------
+Method:
+    POST
+
+URL:
+    http://127.0.0.1:8000/api/products
+
+Body -> raw -> JSON:
+
+    {
+        "name": "Mouse",
+        "price": 500,
+        "stock": 20
+    }
+
+
+UPDATE
+------
+Method:
+    PUT
+
+URL:
+    http://127.0.0.1:8000/api/products/1
+
+Body:
+
+    {
+        "name": "Gaming Mouse",
+        "price": 750,
+        "stock": 15
+    }
+
+
+DELETE
+------
+Method:
+    DELETE
+
+URL:
+    http://127.0.0.1:8000/api/products/1
+
+
+COMMON HTTP STATUS CODES
+========================
+200 OK             = Request successful
+201 Created        = New record created
+204 No Content     = Successful, no response body (often DELETE)
+400 Bad Request    = Bad request
+401 Unauthorized   = Authentication required/failed
+403 Forbidden      = Not allowed
+404 Not Found      = Route/resource not found
+405 Method Not Allowed = Wrong HTTP method
+422 Unprocessable Content = Validation failed
+500 Internal Server Error = Server-side/Laravel/PHP error
+
+
+============================================================
+GIT CHEAT SHEET
+============================================================
+
+Initialize:
+
+    git init
+
+Check status:
+
+    git status
+
+Stage everything:
+
+    git add .
+
+Commit:
+
+    git commit -m "Create products API"
+
+Show branches:
+
+    git branch
+
+Create and switch:
+
+    git checkout -b development
+
+Switch branch:
+
+    git checkout development
+
+Newer syntax:
+
+    git switch development
+
+Create + switch using newer syntax:
+
+    git switch -c development
+
+View commits:
+
+    git log --oneline
+
+See changes:
+
+    git diff
+
+IMPORTANT:
+Commit often after a working milestone.
+
+Example workflow:
+
+    git status
+    git add .
+    git commit -m "Create product model and migration"
+
+Then after CRUD:
+
+    git add .
+    git commit -m "Implement product CRUD API"
+
+
+============================================================
+COMMON ERRORS — QUICK CHECKS
+============================================================
+
+1) "Class ... does not exist"
+--------------------------------
+Check namespace/import spelling.
+
+Correct example:
+
+    use App\Http\Controllers\ProductController;
+
+NOT:
+
+    use app\Http\Controllers\ProductController;
+
+PHP/Laravel convention uses capital "App".
+
+Try:
+
+    composer dump-autoload
+    php artisan optimize:clear
+
+
+2) "syntax error, unexpected token public"
+-------------------------------------------
+Usually check:
+- Missing }
+- Extra }
+- Missing ;
+- A method accidentally placed inside another method
+
+In a controller, methods should look like:
+
+    class ProductController extends Controller
+    {
+        public function index()
+        {
+            ...
+        }
+
+        public function store(Request $request)
+        {
+            ...
+        }
+    }
+
+
+3) 404 Not Found
+----------------
+Run:
+
+    php artisan route:list
+
+Verify:
+- Correct URL
+- /api prefix
+- Correct route spelling
+
+
+4) 405 Method Not Allowed
+-------------------------
+Correct endpoint but wrong method.
+
+Example:
+Route expects POST but Postman is using GET.
+
+
+5) 422 Validation Error
+-----------------------
+Laravel received the request, but submitted data failed validation.
+Check Postman JSON field names and required values.
+
+
+6) 500 Error
+------------
+Look at:
+- Terminal running php artisan serve
+- storage/logs/laravel.log
+
+PowerShell last lines:
+
+    Get-Content .\storage\logs\laravel.log -Tail 50
+
+
+7) Database connection error
+----------------------------
+Check:
+- MySQL running in XAMPP
+- Database exists
+- .env DB_DATABASE
+- Username/password
+- Port
+
+Then:
+
+    php artisan config:clear
+
+
+8) "getaddrinfo ENOTFOUND api" in Postman
+-----------------------------------------
+Do NOT enter only something like:
+
+    api/products
+
+Use the complete local URL:
+
+    http://127.0.0.1:8000/api/products
+
+
+============================================================
+QUICK DEVELOPMENT WORKFLOW TO MEMORIZE
+============================================================
+
+1. Create project / enter project.
+2. Configure .env database.
+3. Create database.
+4. Create model + migration:
+
+       php artisan make:model Product -m
+
+5. Edit migration.
+6. Run:
+
+       php artisan migrate
+
+7. Edit model ($fillable).
+8. Create API controller:
+
+       php artisan make:controller ProductController --api
+
+9. Add CRUD methods.
+10. Add route:
+
+       Route::apiResource('products', ProductController::class);
+
+11. Check:
+
+       php artisan route:list
+
+12. Start:
+
+       php artisan serve
+
+13. Test in Postman:
+       GET
+       POST
+       GET /1
+       PUT /1
+       DELETE /1
+
+14. Git:
+
+       git status
+       git add .
+       git commit -m "Implement product API"
+
+
+============================================================
+WHAT WORKS OFFLINE?
+============================================================
+
+Normally works offline AFTER dependencies/tools are installed:
+
+[ ] php artisan serve
+[ ] php artisan make:model
+[ ] php artisan make:controller
+[ ] php artisan make:migration
+[ ] php artisan migrate
+[ ] Local MySQL
+[ ] Postman -> localhost
+[ ] Git init/add/commit/branch
+[ ] VS Code editing
+[ ] Laravel CRUD development
+
+May require INTERNET:
+
+[ ] composer create-project
+[ ] composer require PACKAGE
+[ ] composer install if package files are not cached
+[ ] composer update
+[ ] php artisan install:api if it needs packages
+[ ] npm install
+[ ] Installing VS Code extensions
+[ ] Downloading Postman/XAMPP/Composer/Git/Node
+[ ] Git push/pull to remote repositories
+[ ] Looking up documentation
+
+
+============================================================
+EMERGENCY — INTERNET WILL END IN 5 MINUTES
+============================================================
+
+STOP CODING.
+
+1. Finish Composer/Laravel dependencies.
+2. Make sure vendor exists.
+3. Run API installation if required.
+4. Make sure Postman is installed and opens.
+5. Make sure XAMPP/PHP/MySQL works.
+6. Download assessment/reference files.
+7. Install missing VS Code extensions/tools.
+8. Test:
+
+       php artisan serve
+       php artisan route:list
+       php artisan migrate
+
+9. Send one localhost request using Postman.
+
+
