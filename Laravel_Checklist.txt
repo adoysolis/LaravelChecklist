@@ -41,6 +41,7 @@ Install while online if you want them:
 - PHP Intelephense
 - Laravel-related extensions
 - GitLens (optional)
+- emmet
 
 Extensions are helpful, but Laravel itself does not require them.
 
